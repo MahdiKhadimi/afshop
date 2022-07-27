@@ -1,0 +1,109 @@
+
+       ... make auth ...
+
+       for front end
+1- composer require laravel/ui --dev
+2- php artisan ui bootstrap --auth/ php artisan ui vue --auth
+3- npm install
+4- npm run dev
+
+
+            ...  make authentication and login ...
+- make model and register guard 
+- edit auth.php 
+- make middleware and ....
+- register middleware in the route
+- use form guard in the login method : Auth::guard->attempt(
+                                   'column'=>'data'
+
+                            to show information from guard       
+- Auth::guard('guardName')->user()                               )
+- Auth::guard('guardName')->user()->columnName()
+
+
+                               )
+      -$require->isMethod('')
+- for logout: Auth:guard('name')->logout()      
+
+
+
+             ... make section ...
+ -Man:
+ -Women:
+ -Kids:
+
+
+          ... update note ...
+1- make change on composer.jon
+2- make change on handler.php
+3- composer update 
+           
+           ... using form ajax ...
+1- you can change in the VerityCsrftoken and ignore some route from token
+2- VerityCsrftoken
+3- namespace App\Http\Middleware\VerityCsrftoken
+
+- response()->json()
+
+               ... upload image ...
+ - install Intervention Package: it is for resize image
+   - composer require Intervention/image
+   - use Image;
+   - Image::make($request->file('name))->save($path)
+   - Image::make($request->file('name))->resize(width,height)->save($path)
+   -image validation in jquery : add this property accept="image/*" 
+      feature in e_commerce website 
+  -section: 
+         man:T-shirt,  Denims
+         woman: tops,  Denims
+         Kids:  T-shirt,
+    - create section table
+   - javascript:void(0)
+
+                  ... accessor...
+   - modify data record before show it.             
+  1- make accessor function inside model   public function getNameAttribute(){}
+
+               ... general thing i have learned... 
+ - php artisan down
+ - php artisan up 
+ - view\errors\404.blade.php, 503.blade.php
+- morphTo relationship
+- return abort('404')
+- study more about stric option in config/database.php
+
+                     ... showing alert... 
+   - use sweetaler to show image                   
+
+1- @old('field_name');
+2- make array in the controller to filter data in the view 
+
+                  ... showing php data in js ...
+1- var data = @json($users);
+- php artisan add_column_to_tableName
+
+
+NOTE: please check the part-1
+
+
+
+ ///    .... Front End ....     /////
+ - Index/Home Page 
+ - Listing page
+ - Detail page 
+ - Shoping cart page 
+ - Login/Register Acount page 
+ - Checkout Page 
+ - Order/Review Page 
+ - Payment methods/ CDD 
+ - Order placement/Confrimation 
+
+ Step to make website online 
+ 1- select Domain 
+ 2- select Host
+ 3- upload website code via FTP or filemanager 
+ 4- make and upload  database of website 
+ 5- make connection between database and website and other require setting 
+
+
+part-70;

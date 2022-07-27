@@ -1,0 +1,14 @@
+
+/* custom style  */
+
+table tr td,th{
+    text-align: center;
+}
+
+td.edit,td.delete,th.delete, th.edit{
+    width:40px;
+}
+
+.carousel-inter img {
+    width:100%;
+}
