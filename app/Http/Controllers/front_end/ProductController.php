@@ -31,10 +31,12 @@ class ProductController extends Controller
   public function product_list($section){
       
     
-    $product_list = Product::with('section','category','brand','colors','image','product_attribute')
+    $product_list = Product::with('section','category','product_attribute','brand','colors','comments')
                     ->get();
     $sections = section::get();
     $brands = brand::get();
+    return $product_list;
+    exit;
     return view('front_end\category\product_list',compact('product_list','sections','brands'));  
   
   }

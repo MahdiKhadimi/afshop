@@ -33,7 +33,9 @@ class product extends Model
     ];
     
    public function section(){
-       return $this->belongsToMany(Section::class);
+       return $this->belongsToMany(Section::class)
+       ->using(product_section::class);
+       
    }
 
   public function category(){
