@@ -132,6 +132,7 @@
   
       <script src="{{ asset('front_end/assets/corporate/scripts/layout.js')}}" type="text/javascript"></script>
       <script src="{{ asset('front_end/assets/pages/scripts/bs-carousel.js')}}" type="text/javascript"></script>
+      <script src="{{ asset('front_end/assets/pages/scripts/front_end.js')}}" type="text/javascript"></script>
       <script type="text/javascript">
           jQuery(document).ready(function() {
               Layout.init();    

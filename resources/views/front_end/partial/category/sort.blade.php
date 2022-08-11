@@ -8,26 +8,23 @@
       <div class="pull-right">
         <label class="control-label">Show:</label>
         <select class="form-control input-sm">
-          <option value="#?limit=24" selected="selected">24</option>
-          <option value="#?limit=25">25</option>
-          <option value="#?limit=50">50</option>
-          <option value="#?limit=75">75</option>
-          <option value="#?limit=100">100</option>
+          <option >10</option>
+          @for($i=25;$i<=100;$i+=25)
+            <option>{{ $i }}</option>
+          @endfor  
         </select>
       </div>
 
+      
       <div class="pull-right">
+        <input type="hidden" value="{{ $section }}" id="section">
+        <input type="hidden" value="{{ $category }}" id="category">
+        
         <label class="control-label">Sort&nbsp;By:</label>
-        <select class="form-control input-sm">
-          <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-          <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-          <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-          <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-          <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-          <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-          <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-          <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-          <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+        <select class="form-control input-sm" id="sortProduct">
+          @foreach ($show_sort as $item)
+            <option >{{ $item }}</option>     
+          @endforeach
         </select>
       </div>
     </div>

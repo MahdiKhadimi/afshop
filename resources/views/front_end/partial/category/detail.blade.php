@@ -3,11 +3,9 @@
                 <div class="product-page product-pop-up">
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-3">
-                      <div class="product-main-image">
-                     
+                      <div class="product-main-image">                     
                         @if (!empty($picture))
                         <img id="productImage{{$item->id}}" src="{{ asset($picture) }}" alt="">
-                       
                        @endif
                       </div>
                       <div class="product-other-images">

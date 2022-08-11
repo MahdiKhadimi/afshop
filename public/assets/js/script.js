@@ -34,7 +34,7 @@ $(document).ready(function(){
         if(this.readyState==4 && this.status==200){  
           if(this.responseText==0){
               $("#brand-"+brand_id).html('<i class="fas fa-toggle-off" aria-hidden="true" status="inactive"></i>');
-          }else{
+;          }else{
             $("#brand-"+brand_id).html('<i class="fas fa-toggle-on" aria-hidden="true" status="active"></i>');
           }
         }

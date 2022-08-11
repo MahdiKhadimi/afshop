@@ -11,6 +11,7 @@ class product_section extends Pivot
     use HasFactory;
     protected $table = 'product_section';
     public $incrementing = true;
+    
     protected $fillable = [
         'product_id',
         'section_id'

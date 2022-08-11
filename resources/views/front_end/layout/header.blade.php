@@ -198,7 +198,7 @@
               {{--  <!-- BEGIN DROPDOWN MENU -->  --}}
               <ul class="dropdown-menu">
                @foreach ($section->categories as $category)
-                <li><a href="{{ route('product.product_list',['section'=>$section->id]) }}">{{ $category->name }}</a></li>
+                <li><a href="{{ route('product.product_list',['section'=>$section->id,'category'=>$category]) }}">{{ $category->name }}</a></li>
                  
                    
                @endforeach

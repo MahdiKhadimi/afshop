@@ -86,7 +86,7 @@ Route::middleware('admin')->group(function () {
     
 Route::prefix('product')->group(function(){
   Route::get('/detail/{id}',[FrontProductController::class,'product_detail'])->name('product.detail');
-  Route::get('/product_list/{section}',[FrontProductController::class,'product_list'])->name('product.product_list');
+  Route::get('/product_list/{section}/{category}/{sort?}/{show?}',[FrontProductController::class,'product_list'])->name('product.product_list');
 
 });
 
