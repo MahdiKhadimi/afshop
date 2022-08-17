@@ -13,12 +13,11 @@
         <a href="shop-product-list.html">
           <i class="fa fa-angle-right"></i>
           {{ $section->name }}
-          
         </a>
         <ul class="dropdown-menu">
           @foreach ($section->categories as $category)
           <li class="list-group-item dropdown clearfix">
-            <a href="shop-product-list.html">{{$category->name  }} </a>        
+            <a href="shop-product-list.html">{{$category->name  }}</a>        
           </li>    
           @endforeach
         </ul>

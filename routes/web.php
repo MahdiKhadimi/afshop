@@ -83,12 +83,15 @@ Route::middleware('admin')->group(function () {
 });
 
 
-    
-Route::prefix('product')->group(function(){
-  Route::get('/detail/{id}',[FrontProductController::class,'product_detail'])->name('product.detail');
-  Route::get('/product_list/{section}/{category}/{sort?}/{show?}',[FrontProductController::class,'product_list'])->name('product.product_list');
 
+
+Route::prefix('product')->group(function(){
+   Route::get('/detail/{id}',[FrontProductController::class,'product_detail'])->name('product.detail');
+   Route::get('/product_list/{section?}/{category?}',[FrontProductController::class,'product_list'] )->name('product.product_list');
+   Route::post('/product_list_request',[FrontProductController::class,'product_list_with_request'] )->name('product.product_list_request');
+   Route::get('/product_list_with_brand/{brand}',[FrontProductController::class,'list_product_with_brand'])->name('product.product_list_with_brand');
 });
+
 
 Route::prefix('comment')->group(function(){
    Route::post('/store',[CommentController::class,'store'])->name('comment.store');

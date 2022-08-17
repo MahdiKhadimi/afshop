@@ -85,13 +85,9 @@ class CategoryController extends Controller
 
     
     public function edit($id)
-    {
-       
-       
+    { 
         $category = Category::with('sections','image')->findOrFail($id);
-         $sections = Section::all();
-        
-      
+         $sections = Section::all(); 
          return view('category.edit',compact('category','sections'));
     }
 
@@ -99,7 +95,6 @@ class CategoryController extends Controller
     {
         // remove % from the discount  
         $discount= explode('%',$request->discount);
-            
            $category = Category::findOrFail($id);
            $oldPicture = image::where('image_id',$id)
            ->where('image_type','App\Models\category')

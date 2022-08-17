@@ -9,7 +9,7 @@
       <ul class="dropdown-menu">
         @foreach ($section->categories as $category)
         <li class="list-group-item dropdown clearfix">
-          <a href="shop-product-list.html">{{$category->name  }} </a>        
+          <a href="{{ route('product.product_list',['section'=>$section->id,'category'=>$category]) }}">{{$category->name  }} </a>        
         </li>    
         @endforeach
       </ul>
@@ -23,7 +23,7 @@
     <ul class="dropdown-menu">
      @foreach ($brands as $brand)
      <li class="list-group-item dropdown clearfix">
-       <a href="shop-product-list.html">{{$brand->name  }} </a>        
+       <a href="{{ route('product.product_list_with_brand',['brand'=>$brand->id])}}">{{$brand->name }}</a>        
      </li>    
      @endforeach
    </ul>
