@@ -19,9 +19,9 @@
                  @endphp    
                 
     @endforeach 
-       <img src="{{ asset($picture) }}" class="img-responsive" alt="Berry Lace Dress">
+       <img src="@isset($picture) {{ asset($picture) }} @endisset" class="img-responsive" alt="Berry Lace Dress">
         <div>
-         <a href="{{ asset($picture) }}" class="btn btn-default fancybox-button">Zoom</a>
+         <a href="@isset($picture){{ asset($picture) }}@endisset" class="btn btn-default fancybox-button">Zoom</a>
          <a href="#product-pop-up-list{{ $item->id }}" class="btn btn-default fancybox-fast-view">View</a>
        </div>
         </div>

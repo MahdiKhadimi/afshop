@@ -81,8 +81,21 @@ function product_list_with_request(Request $request)
  }
 
 public function list_product_with_brand($brand){
-  return $brand;
+   $show_sort = ['Default','Name(A-Z)','Name(Z-A)'];              
+   $old_sort = $show_sort[0];  
+   $old_show = 10;
+
+   $product_list = Product::join('brand_product','products.id','brand_product.product_id')
+   ->with('section','category','image','product_attribute','brand','colors','comments')
+    ->where('brand_product.brand_id',$brand)
+    ->paginate(10);
+     
+    $sections = section::get();
+    $brands = brand::get();
+
+    return view('front_end\category\product_list_brand',compact('product_list','sections','brands'));  
 }
+
 
 
 }
