@@ -55,9 +55,10 @@ Route::middleware('admin')->group(function () {
     Route::prefix('/product')->group(function(){
        Route::get('/delete/{id}',[ProductController::class,'delete'])->name('product.delete');
     });
+
     Route::resource('category',CategoryController::class)->parameters(['category'=>'id']);
     Route::resource('product',ProductController::class)->parameters(['product'=>'id']);
-    
+
     Route::prefix('product_attribute')->group(function () {
        Route::match(['get', 'post'], '/add/{id}',[ProductAttributeController::class,'create'])->name('product_attribute.add');
        Route::post('/store',[ProductAttributeController::class,'store'])->name('product_attribute.store'); 
@@ -73,16 +74,13 @@ Route::middleware('admin')->group(function () {
    Route::get('/delete/{id}',[BrandController::class,'delete'])->name('brand.delete');
   }); 
 
-  Route::resource('brand', BrandController::class)->parameters(['brand'=>'id']);
-           
+  Route::resource('brand', BrandController::class)->parameters(['brand'=>'id']);           
   // slide show route 
-  Route::prefix('slide_show')->group(function(){
+ Route::prefix('slide_show')->group(function(){
      Route::get('/delete/{id}',[SlideShowController::class,'delete'])->name('slide_show.delete');
   });
   Route::resource('slide_show', SlideShowController::class)->parameters(['slide_show'=>'id']);
 });
-
-
 
 
 Route::prefix('product')->group(function(){
@@ -91,7 +89,6 @@ Route::prefix('product')->group(function(){
    Route::post('/product_list_request',[FrontProductController::class,'product_list_with_request'] )->name('product.product_list_request');
    Route::get('/product_list_with_brand/{brand}',[FrontProductController::class,'list_product_with_brand'])->name('product.product_list_with_brand');
 });
-
 
 Route::prefix('comment')->group(function(){
    Route::post('/store',[CommentController::class,'store'])->name('comment.store');

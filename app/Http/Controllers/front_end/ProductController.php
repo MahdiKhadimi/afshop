@@ -92,7 +92,7 @@ public function list_product_with_brand($brand){
      
     $sections = section::get();
     $brands = brand::get();
-
+    
     return view('front_end\category\product_list_brand',compact('product_list','sections','brands'));  
 }
 
