@@ -41,7 +41,7 @@
                 @endif            
                     
           
-                <a href="javascript:;"  class="btn btn-default add2cart" product="{{ $item->id }}">Add to cart</a>
+                <a href="javascript:;"  class="btn btn-default add2cart" onclick="showCart({{ $item->id }})">Add to cart</a>
                 
                 <div class="sticker sticker-sale"></div>
               </div>

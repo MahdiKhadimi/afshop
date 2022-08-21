@@ -62,6 +62,8 @@ $(document).ready(function(){
   * sent data by ajax to the ImageController
   *
   */
+
+
   function deleteProductImage(id)
   {
     var div = document.getElementById('divImageInfo'+id);
@@ -79,6 +81,5 @@ $(document).ready(function(){
        }
      }  
     }
-  
   }
 

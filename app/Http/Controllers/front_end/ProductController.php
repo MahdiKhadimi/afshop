@@ -96,6 +96,40 @@ public function list_product_with_brand($brand){
     return view('front_end\category\product_list_brand',compact('product_list','sections','brands'));  
 }
 
+public function add_product_to_cart($id){
+     $product = Product::with('image','product_attribute')
+     ->where('id',$id)
+     ->first();
+    $i=1;
+
+    foreach ($product->product_attribute as $product_attribute) {
+      if($i==1){
+         $price=$product_attribute->price;
+         $currency =$product_attribute->price_unit;
+      } 
+      $i++;   
+     }
+
+  $x=1;
+  foreach ($product->image as $image) {
+     if($x==1)$picture = $image->picture;
+     $x++;
+  }
+ if(empty($price)) $price=0;
+ if(empty($currency)) $currency=0;
+ if(empty($picture)) $picture=0;
+
+ session()->put([
+   'id'=>$product->id,
+   'name'=>$product->name,
+   'description'=>$product->description,
+ ]);
+
+return session()->all();
+
+
+}   
+
 
 
 }

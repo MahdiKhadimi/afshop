@@ -18,8 +18,6 @@ use App\Http\Controllers\front_end\ProductController as FrontProductController;
 
 
 Route::get('/',[HomeController::class,'index']);
-
-
 // all admin routes
 Route::any('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::middleware('admin')->group(function () {   
@@ -88,6 +86,8 @@ Route::prefix('product')->group(function(){
    Route::get('/product_list/{section?}/{category?}',[FrontProductController::class,'product_list'] )->name('product.product_list');
    Route::post('/product_list_request',[FrontProductController::class,'product_list_with_request'] )->name('product.product_list_request');
    Route::get('/product_list_with_brand/{brand}',[FrontProductController::class,'list_product_with_brand'])->name('product.product_list_with_brand');
+   Route::get('/cart/{id}',[FrontProductController::class,'add_product_to_cart'])->name('product.product_to_cart');
+
 });
 
 Route::prefix('comment')->group(function(){

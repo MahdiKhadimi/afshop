@@ -106,4 +106,4 @@ NOTE: please check the part-1
  5- make connection between database and website and other require setting 
 
 
-part-71;
+part-75;
