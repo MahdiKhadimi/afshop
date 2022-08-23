@@ -23,12 +23,8 @@ class ProductController extends Controller
         return view('front_end\product_detail\product_item',compact('product_detail','brands','sections'));
     }
 
-
   public function product_list($section=null,$category=null)
   {
-
-
-
       $show_sort = ['Default','Name(A-Z)','Name(Z-A)'];              
       $product_list = Product::join('category_product','products.id','=','category_product.product_id')
       ->with('section','category','image','product_attribute','brand','colors','comments')
@@ -123,9 +119,12 @@ public function add_product_to_cart($id){
    'id'=>$product->id,
    'name'=>$product->name,
    'description'=>$product->description,
+   'description'=>$product->description,
  ]);
 
-return session()->all();
+session()->put('name[]',$product->name);
+
+return session()->get('name','Mahdi Jon I Love You');
 
 
 }   

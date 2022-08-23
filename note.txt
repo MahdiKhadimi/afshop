@@ -105,5 +105,10 @@ NOTE: please check the part-1
  4- make and upload  database of website 
  5- make connection between database and website and other require setting 
 
+Add to cart 
+1- create cart table with migration:id, session_id, usert_id, product_id, quantity,created_at, updated_at
+2- Add to cart Form
+3- insert product in cart table
 
-part-75;
+
+part-84;

@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-
+use app\Controllers\front_end\ProductController;
 class ExampleTest extends TestCase
 {
     /**
@@ -15,4 +15,9 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+   public function test_sepecifiect_session_exist(){
+       $this->assertSessionHas('name');
+
+   }
 }

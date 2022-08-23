@@ -111,7 +111,7 @@
 
         {{--  include cart  --}}
         @include('front_end.partial.cart')
-
+       
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation">
           <ul>
