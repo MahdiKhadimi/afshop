@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\front_end;
 
+use App\Models\cart;
 use App\Models\brand;
 use App\Models\product;
 use App\Models\section;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\product_section;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 
 class ProductController extends Controller
@@ -25,12 +27,12 @@ class ProductController extends Controller
 
   public function product_list($section=null,$category=null)
   {
+       
       $show_sort = ['Default','Name(A-Z)','Name(Z-A)'];              
       $product_list = Product::join('category_product','products.id','=','category_product.product_id')
-      ->with('section','category','image','product_attribute','brand','colors','comments')
+      ->with(['section','category','image','product_attribute','brand','colors','comments'])
       ->where('category_product.category_id','=',$category)
-      ->paginate(10);
-         
+      ->paginate(10);  
     $sections = section::get();
     $brands = brand::get();  
     $old_sort = $show_sort[0];  
@@ -92,42 +94,39 @@ public function list_product_with_brand($brand){
     return view('front_end\category\product_list_brand',compact('product_list','sections','brands'));  
 }
 
-public function add_product_to_cart($id){
-     $product = Product::with('image','product_attribute')
-     ->where('id',$id)
-     ->first();
-    $i=1;
+public function add_product_to_cart(Request $request){
+   date_default_timezone_set('Asia/Kabul');    
+   // generate session_id if not exist 
+       $session_id = Session::get('session_id');
+       if(empty($section_id)){
+         $session_id = Session::getId();
+         Session::put('session_id',$session_id);
+        }     
+       $user_id=NULL;
+     
+     //check if product exist in the cart table  don't add it again 
+      $product_exist = cart::where('product_id',$request->product_id)
+                       ->count();
 
-    foreach ($product->product_attribute as $product_attribute) {
-      if($i==1){
-         $price=$product_attribute->price;
-         $currency =$product_attribute->price_unit;
-      } 
-      $i++;   
-     }
-
-  $x=1;
-  foreach ($product->image as $image) {
-     if($x==1)$picture = $image->picture;
-     $x++;
-  }
- if(empty($price)) $price=0;
- if(empty($currency)) $currency=0;
- if(empty($picture)) $picture=0;
-
- session()->put([
-   'id'=>$product->id,
-   'name'=>$product->name,
-   'description'=>$product->description,
-   'description'=>$product->description,
- ]);
-
-session()->put('name[]',$product->name);
-
-return session()->get('name','Mahdi Jon I Love You');
+        // insert product to cart
+         DB::table('carts')->updateOrInsert(['product_id'=>$request->product_id],[
+            'product_id'=>$request->product_id,
+            'session_id'=>$session_id,
+            'user_id'=>$user_id,
+            'quantity'=>$request->quantity,
+            'size'=>$request->size,
+            'color'=>$request->color,
+            'created_at'=> now(),
+            'updated_at'=>now()
+         ]);
+        session()->flash('success','product successfully add to the cart table');
+    
+      return redirect()->back(); 
+}
 
 
-}   
+
+
 
 
 

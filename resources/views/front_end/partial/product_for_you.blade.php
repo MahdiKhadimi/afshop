@@ -3,13 +3,17 @@
       <!-- BEGIN SALE PRODUCT & NEW ARRIVALS -->
       <div class="row margin-bottom-40">
         <!-- BEGIN SALE PRODUCT -->
+        <form action= "{{route('product.add_to_cart') }}" method="post"> 
+          @csrf  
         <div class="col-md-12 sale-product">
           <h2>Product For You</h2>
+          
           <div class="owl-carousel owl-carousel5">
             
               @foreach ($products_for_you as $item)  
               <div>           
               <div class="product-item">
+               <form action="{{ route('product.add_to_cart') }}" method="post">
                 <div class="pi-img-wrapper">
                   @foreach ($item->image as $image )
                   @php
@@ -25,6 +29,8 @@
                   </div>
                @endif 
                 </div>
+               </form>
+
                 <h3><a href="shop-item.html">{{ $item->name }}</a></h3>
              
                   @foreach ($item->product_attribute as $attribute)
@@ -35,13 +41,13 @@
                   @endforeach
 
                 @if (!empty($price))
-                <div class="pi-price">{{ $price }} {{ $unit }}</div>
-                   
-                    
-                @endif            
-                    
-          
-                <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                <div class="pi-price">{{ $price }} {{ $unit }}</div>            
+                @endif           
+                <input type="hidden" value="1" name="quantity">
+                <input type="hidden" value="{{ $item->id }}" name="product_id">
+                <input type="submit" value="Add to cart" class="btn btn-defaul add2cart"> 
+             
+
                 <div class="sticker sticker-sale"></div>
               </div>
                
@@ -92,10 +98,12 @@
         <div class="description">
           <p>{{ $item->description }}</p>
         </div>
+       <form action="{{ route('product.add_to_cart') }}" method="post">
+         @csrf
         <div class="product-page-options">
           <div class="pull-left">
             <label class="control-label">Size:</label>
-            <select class="form-control input-sm">
+            <select class="form-control input-sm" name="size">
               @foreach ($item->product_attribute as $attribute)
                <option >{{ $attribute->size }}</option>
                   
@@ -104,7 +112,7 @@
           </div>
           <div class="pull-left">
             <label class="control-label">Color:</label>
-            <select class="form-control input-sm">
+            <select class="form-control input-sm" name="color">
               @foreach ($item->colors as $color)
                 <option value="{{ $color->id }}">{{ $color->name }}</option>
               @endforeach
@@ -113,10 +121,13 @@
         </div>
         <div class="product-page-cart">
           <div class="product-quantity">
-              <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
+              <input id="product-quantity" type="text" value="1" readonly name="quantity" class="form-control input-sm">
           </div>
-          <button class="btn btn-primary" type="submit">Add to cart</button>
-          <a href="{{ route('product.detail',['id'=>$item->id] ) }}" class="btn btn-default">More details</a>
+
+           <input type="hidden" value="{{ $item->id }}" name="product_id">
+           <input type="submit" value="Add to cart" class="btn btn-defaul add2cart"> 
+          
+           <a href="{{ route('product.detail',['id'=>$item->id] ) }}" class="btn btn-default">More details</a>
         </div>
       </div>
 

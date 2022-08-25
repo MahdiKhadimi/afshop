@@ -2,7 +2,9 @@
   @foreach ($product_list as $item) 
   
                 {{--  <!-- PRODUCT ITEM START -->  --}}
-                        <div class="col-md-4 col-sm-6 col-xs-12" style="min-height: 300px;">
+      <div class="col-md-4 col-sm-6 col-xs-12" style="min-height: 300px;">
+         <from action="{{ route('product.add_to_cart') }}" method="post">
+            @csrf
                   <div class="product-item">
                     <div class="pi-img-wrapper">
                  @foreach ($item->image as $image)
@@ -31,8 +33,13 @@
                 {{ $unit }} {{ $price }}
               @endif 
            </div>
-            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+           
+
+           <input type="hidden" value="1" name="quantity">
+           <input type="hidden" value="{{ $item->id }}" name="product_id">
+           <input type="submit" value="Add to cart" class="btn btn-defaul add2cart"> 
          </div>
+      </form> 
       </div>
   
                 {{--  <!-- PRODUCT ITEM END -->  --}}

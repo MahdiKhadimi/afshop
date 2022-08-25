@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('session_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('product_id');
-            $table->integer('quanity');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

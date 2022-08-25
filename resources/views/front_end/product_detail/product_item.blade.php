@@ -58,11 +58,12 @@
                   </div>
                   <div class="description">
                     <p> {{ $product_detail->meta_description }}</p>
-        
+             <form action= "{{route('product.add_to_cart') }}" method="post"> 
+              @csrf 
                   <div class="product-page-options">
                     <div class="pull-left">
-                      <label class="control-label">Size:</label>
-                      <select class="form-control input-sm">
+                      <label class="control-label">Color:</label>
+                      <select class="form-control input-sm" name="color">
                        @foreach ($product_detail->colors as $color)
                          <option value="{{ $color->id }}">{{ $color->name }}</option>
                            
@@ -70,10 +71,10 @@
                       </select>
                     </div>
                     <div class="pull-left">
-                      <label class="control-label">Color:</label>
-                      <select class="form-control input-sm">
+                      <label class="control-label">Size:</label>
+                      <select class="form-control input-sm" name="size">
                          @foreach ($product_detail->product_attribute as $product_attribute)
-                           <option value="$product_attribute->id">{{ $product_attribute->size }}</option>
+                           <option value="{{ $product_attribute->id}}">{{ $product_attribute->size }}</option>
                              
                          @endforeach
                       </select>
@@ -81,17 +82,15 @@
                   </div>
                   <div class="product-page-cart">
                     <div class="product-quantity">
-                        <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
+                        <input id="product-quantity" type="text" value="1" name="quantity" readonly class="form-control input-sm">
                     </div>
-                    <button class="btn btn-primary" type="submit">Add to cart</button>
-                  </div>
-                  {{--  <div class="review">
-                    <input type="range" value="4" step="0.25" id="backing4">
-                    <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-                    </div>
+                    <input type="hidden" value="{{ $product_detail->id }}" name="product_id">
+                    <input type="submit" value="Add to cart" class="btn btn-defaul add2cart"> 
+          
 
-                    <a href="javascript:;">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:;">Write a review</a>
-                  </div>  --}}
+
+                  </div>
+             </form>    
                   <ul class="social-icons">
                     <li><a class="facebook" data-original-title="facebook" href="javascript:;"></a></li>
                     <li><a class="twitter" data-original-title="twitter" href="javascript:;"></a></li>

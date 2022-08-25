@@ -9,7 +9,10 @@
             
               @foreach ($products as $item)  
               <div>           
+             <form action= "{{route('product.add_to_cart') }}" method="post">  
+              @csrf  
               <div class="product-item">
+             
                 <div class="pi-img-wrapper">
                   @foreach ($item->image as $image )
                   @php
@@ -40,12 +43,13 @@
                     
                 @endif            
                     
-          
-                <a href="javascript:;"  class="btn btn-default add2cart" onclick="showCart({{ $item->id }})">Add to cart</a>
-                
+                <input type="hidden" value="1" name="quantity">
+                <input type="hidden" value="{{ $item->id }}" name="product_id">
+                <input type="submit" value="Add to cart" class="btn btn-defaul add2cart">    
                 <div class="sticker sticker-sale"></div>
               </div>
-               
+            </form>
+
 
 
 
@@ -93,19 +97,21 @@
         <div class="description">
           <p>{{ $item->description }}</p>
         </div>
+      <form action= "{{route('product.add_to_cart') }}" method="post"> 
+        @csrf
         <div class="product-page-options">
           <div class="pull-left">
             <label class="control-label">Size:</label>
-            <select class="form-control input-sm">
+            <select class="form-control input-sm" name="size">
               @foreach ($item->product_attribute as $attribute)
-               <option >{{ $attribute->size }}</option>
+               <option value="{{ $attribute->id }}">{{ $attribute->size }}</option>
                   
               @endforeach
             </select>
           </div>
           <div class="pull-left">
             <label class="control-label">Color:</label>
-            <select class="form-control input-sm">
+            <select class="form-control input-sm" name="color">
               @foreach ($item->colors as $color)
                 <option value="{{ $color->id }}">{{ $color->name }}</option>
               @endforeach
@@ -114,11 +120,15 @@
         </div>
         <div class="product-page-cart">
           <div class="product-quantity">
-              <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
+              <input id="product-quantity" type="text" value="1" readonly name="quantity" class="form-control input-sm">
           </div>
-          <button class="btn btn-primary" type="submit">Add to cart</button>
+      
+          <input type="hidden" value="{{ $item->id }}" name="product_id">
+          <input type="submit" value="Add to cart" class="btn btn-defaul add2cart"> 
+
           <a href="{{ route('product.detail',['id'=>$item->id]) }}" class="btn btn-default">More details</a>
         </div>
+      </form>  
       </div>
 
       <div class="sticker sticker-sale"></div>

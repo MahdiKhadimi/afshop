@@ -1,5 +1,7 @@
              {{--   start product details   --}}    
      <div id="product-pop-up-list{{ $item->id }}" style="display:none; width: 700px;">
+      <form action="{{ route('product.add_to_cart') }}" method="post">
+        @csrf 
                 <div class="product-page product-pop-up">
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-3">
@@ -40,9 +42,10 @@
                       <div class="description">
                         <p>{{ $item->description }}</p>
                       </div>
+                     
                       <div class="product-page-options">
                         <div class="pull-left">
-                          <label class="control-label">Size:</label>
+                          <label class="control-label" name="size">Size:</label>
                           <select class="form-control input-sm">
                             @foreach ($item->product_attribute as $attribute)
                              <option >{{ $attribute->size }}</option>
@@ -52,7 +55,7 @@
                         </div>
                         <div class="pull-left">
                           <label class="control-label">Color:</label>
-                          <select class="form-control input-sm">
+                          <select class="form-control input-sm" name="color">
                             @foreach ($item->colors as $color)
                               <option value="{{ $color->id }}">{{ $color->name }}</option>
                             @endforeach
@@ -61,16 +64,22 @@
                       </div>
                       <div class="product-page-cart">
                         <div class="product-quantity">
-                            <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
+                            <input id="product-quantity" type="text" value="1" readonly name="quantity" class="form-control input-sm">
                         </div>
-                        <button class="btn btn-primary" type="submit">Add to cart</button>
+                        
+                        <input type="hidden" value="{{ $item->id }}" name="product_id">
+                        <input type="submit" value="Add to cart" class="btn btn-defaul add2cart"> 
+
+
                         <a href="{{ route('product.detail',['id'=>$item->id]) }}" class="btn btn-default">More details</a>
                       </div>
+                   
                     </div>
               
                     <div class="sticker sticker-sale"></div>
                   </div>
                 </div>
+      </form> 
                 </div>
                 {{--  end product details   --}}
             

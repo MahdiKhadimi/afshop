@@ -104,6 +104,7 @@ NOTE: please check the part-1
  3- upload website code via FTP or filemanager 
  4- make and upload  database of website 
  5- make connection between database and website and other require setting 
+---- Importance of subquery in relationship 
 
 Add to cart 
 1- create cart table with migration:id, session_id, usert_id, product_id, quantity,created_at, updated_at
@@ -111,4 +112,4 @@ Add to cart
 3- insert product in cart table
 
 
-part-84;
+part-86;
