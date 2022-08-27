@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\product_section;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
@@ -124,6 +125,15 @@ public function add_product_to_cart(Request $request){
       return redirect()->back(); 
 }
 
+public function show_cart(){
+   if(Auth::check()){
+      $cart_list = cart::with('product')->where('user_id',Auth::usert()->id)->get();
+   }else{
+      $cart_list = cart::with('product','image')
+      ->where('session_id',Session()->get('session_id'))->get();
+   }
+   return $cart_list;
+}
 
 
 

@@ -87,8 +87,9 @@ Route::prefix('product')->group(function(){
    Route::post('/product_list_request',[FrontProductController::class,'product_list_with_request'] )->name('product.product_list_request');
    Route::get('/product_list_with_brand/{brand}',[FrontProductController::class,'list_product_with_brand'])->name('product.product_list_with_brand');
    Route::post('/cart',[FrontProductController::class,'add_product_to_cart'])->name('product.add_to_cart');
-
 });
+
+Route::get('/show_cart',[FrontProductController::class,'show_cart'])->name("product.show_cart");
 
 Route::prefix('comment')->group(function(){
    Route::post('/store',[CommentController::class,'store'])->name('comment.store');
