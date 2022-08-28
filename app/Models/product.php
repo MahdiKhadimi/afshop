@@ -32,6 +32,12 @@ class product extends Model
         'fit',
     ];
     
+  public function __construct()
+  {
+      return $this->image();
+  }
+
+
    public function section(){
        return $this->belongsToMany(Section::class)
        ->using(product_section::class);

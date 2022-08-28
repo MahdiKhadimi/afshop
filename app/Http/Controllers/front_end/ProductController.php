@@ -4,6 +4,7 @@ namespace App\Http\Controllers\front_end;
 
 use App\Models\cart;
 use App\Models\brand;
+use App\Models\category;
 use App\Models\product;
 use App\Models\section;
 use Illuminate\Http\Request;
@@ -106,11 +107,12 @@ public function add_product_to_cart(Request $request){
        $user_id=NULL;
      
      //check if product exist in the cart table  don't add it again 
-      $product_exist = cart::where('product_id',$request->product_id)
+      $product_exist = cart::where(['product_id'=>$request->product_id,'session_id'=>$session_id])
                        ->count();
 
         // insert product to cart
-         DB::table('carts')->updateOrInsert(['product_id'=>$request->product_id],[
+     if($product_exist<=0){ 
+         DB::table('carts')->Insert([
             'product_id'=>$request->product_id,
             'session_id'=>$session_id,
             'user_id'=>$user_id,
@@ -121,7 +123,25 @@ public function add_product_to_cart(Request $request){
             'updated_at'=>now()
          ]);
         session()->flash('success','product successfully add to the cart table');
-    
+      }else{
+         DB::table('carts')
+            ->where([
+               'product_id'=>$request->product_id,
+               'session_id'=>$session_id
+               ])
+            ->Update([
+            'product_id'=>$request->product_id,
+            'session_id'=>$session_id,
+            'user_id'=>$user_id,
+            'quantity'=>$request->quantity,
+            'size'=>$request->size,
+            'color'=>$request->color,
+            'created_at'=> now(),
+            'updated_at'=>now()
+         ]);
+        session()->flash('success','product successfully add to the cart table');
+      }
+      
       return redirect()->back(); 
 }
 
@@ -129,12 +149,29 @@ public function show_cart(){
    if(Auth::check()){
       $cart_list = cart::with('product')->where('user_id',Auth::usert()->id)->get();
    }else{
-      $cart_list = cart::with('product','image')
+      $cart_list = cart::with(['product'])
       ->where('session_id',Session()->get('session_id'))->get();
    }
-   return $cart_list;
+   
+   $sections = Section::get();
+   $category = category::get();
+   return view('front_end.cart.shopping_cart',compact('sections','category','cart_list'));
 }
 
+
+public function delete_cart($id){
+   $session_id = Session::get('session_id');
+   $result = Cart::where([
+      'product_id'=>$id,
+      'session_id'=>$session_id
+   ])->delete();
+
+   if($result){
+    Session::flash('success','successfully deleted product from cart');
+   }
+   return redirect()->back();
+  
+}
 
 
 
