@@ -170,9 +170,7 @@ public function delete_cart($id){
     Session::flash('success','successfully deleted product from cart');
    }
    return redirect()->back();
-  
 }
-
 
 
 
