@@ -1,17 +1,18 @@
 <?php
 
+use App\Middleware\admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SlideShowController;
-use App\Http\Controllers\ProductAttributeController;
-use App\Middleware\admin;
-use App\Http\Controllers\front_end\CommentController;
 use App\Http\Controllers\front_end\HomeController;
+use App\Http\Controllers\front_end\UserController;
+use App\Http\Controllers\ProductAttributeController;
+use App\Http\Controllers\front_end\CommentController;
 use App\Http\Controllers\front_end\ProductController as FrontProductController;
 
 
@@ -98,6 +99,15 @@ Route::prefix('comment')->group(function(){
 
 });
 
+
+
+Route::prefix('user')->group(function(){
+    Route::get('/login_form',[UserController::class,'open_login_form'])->name('user.login_form');
+    Route::get('/register_form',[UserController::class,'open_register_form'])->name('user.register_form');
+    Route::post('/register',[UserController::class,'register'])->name('user.register');
+    Route::post("/login",[UserController::class,'login'])->name('user.login');
+ 
+});
 
 
 

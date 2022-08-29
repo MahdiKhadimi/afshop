@@ -31,7 +31,7 @@
       <p class="login-box-msg">Sign in</p>
 
       {{--  login form  --}}
-      <form action="{{ route('admin.login') }}" method="post"> 
+      <form action="{{ route('user.login') }}" method="post"> 
         @csrf
 
          {{--  show login errors  --}}
@@ -104,7 +104,7 @@
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="{{ route('user.register_form') }}" class="text-center">Register a new account</a>
       </p>
     </div>
     <!-- /.login-card-body -->

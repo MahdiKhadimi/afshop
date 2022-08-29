@@ -112,4 +112,18 @@ Add to cart
 3- insert product in cart table
 
 
-part-88;
+ For front login page we use default auth 
+
+User Ligin/Register Process
+1- embed user login form 
+2- insert user into users table if not exist 
+3- apply user validation 
+4- send user Email offline/online 
+5- send user register SMS(integrate MSM API with Curle) 
+6- apply user validation for login form  
+7- aut: attemp for user 
+8- addd product into user cart whent user login or rigester 
+
+
+
+part-96;
