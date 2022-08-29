@@ -104,8 +104,10 @@ Route::prefix('comment')->group(function(){
 Route::prefix('user')->group(function(){
     Route::get('/login_form',[UserController::class,'open_login_form'])->name('user.login_form');
     Route::get('/register_form',[UserController::class,'open_register_form'])->name('user.register_form');
+    Route::get('/forgot_password_form',[UserController::class,'open_forgot_password_form'])->name('user.forgot_password_form');
     Route::post('/register',[UserController::class,'register'])->name('user.register');
     Route::post("/login",[UserController::class,'login'])->name('user.login');
+    Route::post("/forgot_password",[UserController::class,'forgot_password'])->name('user.forgot_password');
  
 });
 

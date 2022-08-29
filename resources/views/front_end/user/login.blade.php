@@ -16,6 +16,7 @@
   {{--  <!-- Theme style -->  --}}
   <link rel="stylesheet" href="{{asset('assets/css/adminlte.min.css') }}">
 </head>
+
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
@@ -101,7 +102,7 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        <a href="{{ route('user.forgot_password_form') }}">I forgot my password</a>
       </p>
       <p class="mb-0">
         <a href="{{ route('user.register_form') }}" class="text-center">Register a new account</a>
