@@ -125,5 +125,6 @@ User Ligin/Register Process
 8- addd product into user cart whent user login or rigester 
 
 
+- php artian make:migration add_columns_to_tableName_table
 
-part-96;
+part-98;
