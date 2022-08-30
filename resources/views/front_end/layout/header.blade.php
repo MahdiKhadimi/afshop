@@ -90,10 +90,13 @@
                 {{--  <!-- BEGIN TOP BAR MENU -->  --}}
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
+                        @if(Auth::check())
                         <li><a href="shop-account.html">My Account</a></li>
-                        <li><a href="shop-wishlist.html">My Wishlist</a></li>
+                        <li><a href="{{ route('user.logout') }}">Logout</a></li>
+                        @else 
+                        <li><a href="{{ route('user.login_form') }}">Log In | Register</a></li>
+                        @endif
                         <li><a href="shop-checkout.html">Checkout</a></li>
-                        <li><a href="{{ route('user.login_form') }}">Log In</a></li>
                     </ul>
                 </div>
                 {{--  <!-- END TOP BAR MENU -->  --}}

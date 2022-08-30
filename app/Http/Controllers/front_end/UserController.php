@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\front_end;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -19,16 +22,61 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
-        return $request->all();
+        $request->validate([
+            'email'=>'required',
+            'password'=>'required',
+        ],[
+            'email.required'=>'Please insert your email',
+            'password.required'=>'please insert your password',
+        ]);
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            return redirect('/');
+        }else{
+            session()->flash('error','Incorrect your email or password');
+            return redirect()->back();
+        }
     }
 
     public function register(Request $request){
-       return $request->all();
+        $request->validate([
+            'name'=>'required',
+            'email'=>'email|required',
+            'password'=>'required',
+            'phone'=>'required',
+            'confirm_password'=>'same:password'
+        ],[
+            'name.required'=>'Please write your email',
+            'email.email'=>'Please Enter a valid email address',
+            'password.required'=>'Please insert password',
+            'email.required'=>'please insert your email',
+            'phone.required'=>'Please inter your phone number',
+            'confirm_password.same'=>'do not much your password please try again!'
+        ]);
+
+       $number_of_user = User::where('email',$request->email)->count();
+       if($number_of_user>0){
+           session()->flash('error','The email address already exist!');
+           return redirect()->back();
+       }else{
+           $user = new User;
+           $user->name= $request->name;
+           $user->email = $request->email;
+           $user->password = Hash::make($request->password);
+           $user->phone = $request->phone;
+           $user->save();
+           if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
+               return redirect('/');
+           }
+       }   
     }
 
     public function forgot_password(Request $request){
        
     }
-    
+
+    public function logout(){
+        Auth::logout();
+        return redirect('/');
+    }
    
 }

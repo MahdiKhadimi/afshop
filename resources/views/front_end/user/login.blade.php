@@ -30,34 +30,12 @@
       @include('partial.message.error')
 
       <p class="login-box-msg">Sign in</p>
-
+    
+      
       {{--  login form  --}}
       <form action="{{ route('user.login') }}" method="post"> 
         @csrf
-
-         {{--  show login errors  --}}
-         @if($errors->any())
-         @foreach($errors->all() as $error)
-           <div class="alert alert-warning fade show">
-               <ol>
-                  <li >{{ $error }}</li>
-                  <button class="close" data-dismiss="alert">
-                    <span >&times;</span>
-                  </button>
-               </ol>
-              
-           </div>
-           
-         @endforeach
-
-       @endif
-        
-       {{--  end login error   --}}
-
         <div class="input-group mb-3">
-
-           
-
           <input name="email" type="text" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -65,6 +43,14 @@
             </div>
           </div>
         </div>
+        @error('email')
+        <div class="alert alert-warning fade show">
+            <p>{{ $message }}</p>
+            <button class="close" data-dismiss="alert">
+              <span >&times;</span>
+            </button>
+        </div>
+        @enderror
         <div class="input-group mb-3">
           <input name="password" type="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
@@ -73,6 +59,14 @@
             </div>
           </div>
         </div>
+        @error('password')
+        <div class="alert alert-warning fade show">
+            <p>{{ $message }}</p>
+            <button class="close" data-dismiss="alert">
+              <span >&times;</span>
+            </button>
+        </div>
+        @enderror
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">

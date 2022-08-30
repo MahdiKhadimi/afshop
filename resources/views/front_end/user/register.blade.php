@@ -27,7 +27,10 @@
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new account</p>
-
+        {{--  show login errors  --}} 
+      @include('partial.message.error')
+      @include('partial.message.success')
+      
       <form action="{{ route('user.register') }}" method="post">
         @csrf
         <div class="input-group mb-3">
@@ -38,6 +41,14 @@
             </div>
           </div>
         </div>
+         @error('name')
+         <div class="alert alert-warning fade show">
+             <p>{{ $message }}</p>
+             <button class="close" data-dismiss="alert">
+               <span >&times;</span>
+             </button>
+         </div>
+         @enderror
         <div class="input-group mb-3">
           <input type="email" name="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -46,6 +57,14 @@
             </div>
           </div>
         </div>
+        @error('email')
+        <div class="alert alert-warning fade show">
+            <p>{{ $message }}</p>
+            <button class="close" data-dismiss="alert">
+              <span >&times;</span>
+            </button>
+        </div>
+        @enderror
         <div class="input-group mb-3">
           <input type="phone" name="phone" class="form-control" placeholder="Phone">
           <div class="input-group-append">
@@ -54,6 +73,14 @@
             </div>
           </div>
         </div>
+        @error('phone')
+        <div class="alert alert-warning fade show">
+            <p>{{ $message }}</p>
+            <button class="close" data-dismiss="alert">
+              <span >&times;</span>
+            </button>
+        </div>
+        @enderror
         <div class="input-group mb-3">
           <input type="password" name="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
@@ -62,6 +89,14 @@
             </div>
           </div>
         </div>
+        @error('password')
+        <div class="alert alert-warning fade show">
+            <p>{{ $message }}</p>
+            <button class="close" data-dismiss="alert">
+              <span >&times;</span>
+            </button>
+        </div>
+        @enderror
         <div class="input-group mb-3">
           <input type="password" name="confirm_password" class="form-control" placeholder="Retype password">
           <div class="input-group-append">
@@ -70,6 +105,14 @@
             </div>
           </div>
         </div>
+        @error('confirm_password')
+        <div class="alert alert-warning fade show">
+            <p>{{ $message }}</p>
+            <button class="close" data-dismiss="alert">
+              <span >&times;</span>
+            </button>
+        </div>
+        @enderror
         <div class="row">
          
           <!-- /.col -->

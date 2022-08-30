@@ -108,7 +108,7 @@ Route::prefix('user')->group(function(){
     Route::post('/register',[UserController::class,'register'])->name('user.register');
     Route::post("/login",[UserController::class,'login'])->name('user.login');
     Route::post("/forgot_password",[UserController::class,'forgot_password'])->name('user.forgot_password');
- 
+    Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
 });
 
 

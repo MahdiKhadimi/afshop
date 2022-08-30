@@ -24,7 +24,22 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+        {{--  show login errors  --}}
+        @if($errors->any())
+        @foreach($errors->all() as $error)
+          <div class="alert alert-warning fade show">
+              <ol>
+                 <li >{{ $error }}</li>
+                 <button class="close" data-dismiss="alert">
+                   <span >&times;</span>
+                 </button>
+              </ol>
+             
+          </div>
+          
+        @endforeach
 
+      @endif
       <form action="{{ route('user.forgot_password') }}" method="post">
         @csrf
         <div class="input-group mb-3">
