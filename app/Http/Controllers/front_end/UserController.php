@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\front_end;
+use App\Models\cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -30,6 +32,10 @@ class UserController extends Controller
             'password.required'=>'please insert your password',
         ]);
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            cart::where('session_id',Session::get('session_id'))
+            ->update([
+               'user_id'=>Auth::user()->id,
+             ]);
             return redirect('/');
         }else{
             session()->flash('error','Incorrect your email or password');
@@ -65,6 +71,10 @@ class UserController extends Controller
            $user->phone = $request->phone;
            $user->save();
            if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
+               cart::where('session_id',Session::get('session_id'))
+               ->update([
+                  'user_id'=>Auth::user()->id,
+                ]);
                return redirect('/');
            }
        }   

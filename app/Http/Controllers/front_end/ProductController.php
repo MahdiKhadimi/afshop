@@ -104,11 +104,21 @@ public function add_product_to_cart(Request $request){
          $session_id = Session::getId();
          Session::put('session_id',$session_id);
         }     
-       $user_id=NULL;
+      
      
      //check if product exist in the cart table  don't add it again 
+     if(Auth::check()){
+      $product_exist = cart::where(['product_id'=>$request->product_id,'user_id'=>Auth::user()->id])
+                        ->count();
+     }else{
       $product_exist = cart::where(['product_id'=>$request->product_id,'session_id'=>$session_id])
                        ->count();
+     }
+     if(Auth::check()){
+        $user_id = Auth::user()->id;
+     }else{
+       $user_id = 0;
+     }
 
         // insert product to cart
      if($product_exist<=0){ 
@@ -147,12 +157,11 @@ public function add_product_to_cart(Request $request){
 
 public function show_cart(){
    if(Auth::check()){
-      $cart_list = cart::with('product')->where('user_id',Auth::usert()->id)->get();
+      $cart_list = cart::with('product')->where('user_id',Auth::user()->id)->get();
    }else{
       $cart_list = cart::with(['product'])
       ->where('session_id',Session()->get('session_id'))->get();
    }
-   
    $sections = Section::get();
    $category = category::get();
    return view('front_end.cart.shopping_cart',compact('sections','category','cart_list'));

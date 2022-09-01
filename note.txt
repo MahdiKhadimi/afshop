@@ -127,4 +127,4 @@ User Ligin/Register Process
 
 - php artian make:migration add_columns_to_tableName_table
 
-part-98;
+part-102;
