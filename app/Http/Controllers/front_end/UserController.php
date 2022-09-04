@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\front_end;
 use App\Models\cart;
 use App\Models\User;
+use PharIo\Manifest\Email;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -79,10 +82,37 @@ class UserController extends Controller
            }
        }   
     }
-
     public function forgot_password(Request $request){
-       
-    }
+        $user= User::where('email',$request->email)->count();
+        if($user>0){
+             $password = Hash::make(Str::random(8));
+             $email = $request->email;
+             $user_info = User::select('name')->where('email',$email)->first();
+             $data = [
+                 'email'=>$request->email,
+                 'password'=>$password,
+                 'name'=>$user_info->name
+             ];
+             // update user password in the user table 
+             User::where('email',$request->email)->update([
+                 'password'=>$password
+             ]);
+             // send email to the user 
+             
+      
+            Mail::send('front_end.email.forgot_password', $data, function ($message) use($email){
+                $message->from('afshop@gmail.com', 'AFSHOP');
+                $message->to($email);
+                $message->subject('Your new password');
+            });
+            session()->flash('success','Your password has succesfully updated! Please check your email for new password');
+            return redirect('user/login_form');
+          
+        }else{
+            session()->flash('error','Sorry Your Email Address does not exist!Try make new acount');
+            return redirect()->back();
+        }
+     }
 
     public function logout(){
         Auth::logout();

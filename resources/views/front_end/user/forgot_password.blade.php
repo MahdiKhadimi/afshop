@@ -40,6 +40,8 @@
         @endforeach
 
       @endif
+      @include('partial.message.success')
+      @include('partial.message.error')
       <form action="{{ route('user.forgot_password') }}" method="post">
         @csrf
         <div class="input-group mb-3">

@@ -127,4 +127,25 @@ User Ligin/Register Process
 
 - php artian make:migration add_columns_to_tableName_table
 
-part-102;
+Send SMS From Website 
+ - SMS API Package: buy package 
+       - SMS API URL : provide by 3-th party 
+       - Parameters  : pro
+ SMS API:
+ - Download Free SMS API Script 
+
+Send Email From website
+- open  your gmail account don same setting 
+- change email setting on the .env file 
+- use Email::send()
+Send Email 
+
+           offline email                         online email 
+drivern         smtp                                  sendmail 
+Mail Host       smtp.gmail.com                        smtp.gmail.com      
+Mail Port       587                                    587
+mail_username   gmail emaill address                 server email address 
+Mail_password   gmail password                        server email password
+Mail_encription tls                                   tls 
+
+part-108;
