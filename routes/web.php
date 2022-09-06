@@ -105,12 +105,16 @@ Route::prefix('user')->group(function(){
     Route::post('/register',[UserController::class,'register'])->name('user.register');
     Route::post("/login",[UserController::class,'login'])->name('user.login');
     Route::post("/forgot_password",[UserController::class,'forgot_password'])->name('user.forgot_password');
+});  
+Route::middleware(['auth'])->group(function () {
+Route::prefix('user')->group(function(){
     Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
     Route::get('/open_account',[UserController::class,'open_account'])->name('user.open_account');
     Route::get('/edit_account',[UserController::class,'edit_account'])->name('user.edit_account');
     Route::put('/upate_account',[UserController::class,'update_account'])->name('user.update_account');
     Route::get('/edit_password',[UserController::class,'edit_password'])->name('user.edit_password');
     Route::put('/update_password',[UserController::class,'update_password'])->name('user.update_password');
+});
 });
 
 
