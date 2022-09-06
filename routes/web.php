@@ -81,7 +81,6 @@ Route::middleware('admin')->group(function () {
   Route::resource('slide_show', SlideShowController::class)->parameters(['slide_show'=>'id']);
 });
 
-
 Route::prefix('product')->group(function(){
    Route::get('/detail/{id}',[FrontProductController::class,'product_detail'])->name('product.detail');
    Route::get('/product_list/{section?}/{category?}',[FrontProductController::class,'product_list'] )->name('product.product_list');
@@ -99,8 +98,6 @@ Route::prefix('comment')->group(function(){
 
 });
 
-
-
 Route::prefix('user')->group(function(){
     Route::get('/login_form',[UserController::class,'open_login_form'])->name('user.login_form');
     Route::get('/register_form',[UserController::class,'open_register_form'])->name('user.register_form');
@@ -109,6 +106,11 @@ Route::prefix('user')->group(function(){
     Route::post("/login",[UserController::class,'login'])->name('user.login');
     Route::post("/forgot_password",[UserController::class,'forgot_password'])->name('user.forgot_password');
     Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
+    Route::get('/open_account',[UserController::class,'open_account'])->name('user.open_account');
+    Route::get('/edit_account',[UserController::class,'edit_account'])->name('user.edit_account');
+    Route::put('/upate_account',[UserController::class,'update_account'])->name('user.update_account');
+    Route::get('/edit_password',[UserController::class,'edit_password'])->name('user.edit_password');
+    Route::put('/update_password',[UserController::class,'update_password'])->name('user.update_password');
 });
 
 

@@ -91,7 +91,7 @@
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
                         @if(Auth::check())
-                        <li><a href="shop-account.html">My Account</a></li>
+                        <li><a href="{{ route('user.open_account') }}">My Account</a></li>
                         <li><a href="{{ route('user.logout') }}">Logout</a></li>
                         @else 
                         <li><a href="{{ route('user.login_form') }}">Log In | Register</a></li>
