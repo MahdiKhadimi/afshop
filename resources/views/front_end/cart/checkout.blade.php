@@ -8,10 +8,39 @@
         <div class="row margin-bottom-40">
           <!-- BEGIN CONTENT -->
           <div class="col-md-12 col-sm-12">
-            <h1>Shopping cart</h1>
+            <h1>delivery address</h1>
             <div class="goods-page">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th></th>
+                 <th>Country</th>
+                 <th>City</th>
+                 <th>State</th>
+                 <th>Phone</th>
+                 <th colspan="2">Action</th>
+               </tr> 
+              </thead>
+               @foreach ($deliveries as $delivery)
+               <tr>
+                 
+                 <input type="hidden" name="delivery_id" value="{{ $delivery->id }}">
+              
+                 <td><input type="checkbox" ></td>
+                 <td>{{ $delivery->address }}</td>
+                 <td>{{ $delivery->city }}</td>
+                 <td>{{ $delivery->state }}</td>
+                 <td>{{ $delivery->phone }}</td>
+                 <td><a href="{{ route('delivery.edit',['id'=>$delivery->id])}}"><span class="fa fa-edit"></span></a></td>
+                 <td><a class="delete" href="{{ route('delivery.delete',['id'=>$delivery->id]) }}"><span class="fa fa-trash"></span></a></td>
+               </tr>
+               @endforeach
+               <caption><a class="btn btn-default" href="{{ route('delivery.add') }}">Add New Address</a></caption>
+               </table>
+               <br>
               <div class="goods-data clearfix">
                 <div class="table-wrapper-responsive">
+                
                 <table summary="Shopping cart">
                   <tr>
                     <th class="goods-page-image">Image</th>
@@ -76,8 +105,7 @@
                   </ul>
                 </div>
               </div>
-              <button class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button>
-              <a class="btn btn-primary" href="{{ url('checkout') }}">Checkout <i class="fa fa-check"></i></a>
+              <button class="btn btn-default pull-right" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button>
             </div>
           </div>
           <!-- END CONTENT -->

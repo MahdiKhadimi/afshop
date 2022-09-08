@@ -13,6 +13,7 @@ use App\Http\Controllers\front_end\HomeController;
 use App\Http\Controllers\front_end\UserController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\front_end\CommentController;
+use App\Http\Controllers\front_end\CheckoutController;
 use App\Http\Controllers\front_end\ProductController as FrontProductController;
 
 
@@ -88,7 +89,17 @@ Route::prefix('product')->group(function(){
    Route::get('/product_list_with_brand/{brand}',[FrontProductController::class,'list_product_with_brand'])->name('product.product_list_with_brand');
    Route::post('/cart',[FrontProductController::class,'add_product_to_cart'])->name('product.add_to_cart');
    Route::post('/update_cart',[FrontProductController::class,'update_cart'])->name('product.update_cart');
-   Route::get('/delete_cart/{id}',[FrontProductController::class,'delete_cart'])->name('cart.delete');
+   Route::get('/delete_cart/{id}',[FrontProductController::class,'delete_cart'])->name('cart.delete');   
+   Route::get('/delete_cart_when_login/{id}',[FrontProductController::class,'delete_cart_when_login'])->name('cart.delete_when_login');   
+});
+Route::get("/checkout",[CheckoutController::class,'checkout'])->name('product.checkout');
+Route::prefix('delivery')->group(function(){
+   Route::get('/add',[CheckoutController::class,'add'])->name('delivery.add');
+   Route::post('/store',[CheckoutController::class,'store'])->name('delivery.store');
+   Route::get('/delete/{id}',[CheckoutController::class,'delete'])->name('delivery.delete');
+   Route::get('/edit/{id}',[CheckoutController::class,'edit'])->name('delivery.edit');
+   Route::put('/upate/{id}',[CheckoutController::class,'update'])->name('delivery.update');
+
 });
 
 Route::get('/show_cart',[FrontProductController::class,'show_cart'])->name("product.show_cart");
@@ -106,6 +117,7 @@ Route::prefix('user')->group(function(){
     Route::post("/login",[UserController::class,'login'])->name('user.login');
     Route::post("/forgot_password",[UserController::class,'forgot_password'])->name('user.forgot_password');
 });  
+
 Route::middleware(['auth'])->group(function () {
 Route::prefix('user')->group(function(){
     Route::get('/logout',[UserController::class,'logout'])->name('user.logout');

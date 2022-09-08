@@ -170,17 +170,29 @@ public function show_cart(){
 
 public function delete_cart($id){
    $session_id = Session::get('session_id');
-   $result = Cart::where([
-      'product_id'=>$id,
-      'session_id'=>$session_id
-   ])->delete();
-
+   $result =  Cart::where([
+      'session_id'=>$session_id,
+      'product_id'=>$id
+      ])
+   ->delete();
    if($result){
     Session::flash('success','successfully deleted product from cart');
    }
    return redirect()->back();
 }
 
+public function delete_cart_when_login($id){
+   $user_id =Auth::user()->id;
+   $result =  Cart::where([
+      'user_id'=>$user_id,
+      'product_id'=>$id
+      ])
+   ->delete();
+   if($result){
+    Session::flash('success','successfully deleted product from cart');
+   }
+   return redirect()->back();
+}
 
 
 
