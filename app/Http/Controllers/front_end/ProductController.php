@@ -28,8 +28,7 @@ class ProductController extends Controller
     }
 
   public function product_list($section=null,$category=null)
-  {
-       
+  {      
       $show_sort = ['Default','Name(A-Z)','Name(Z-A)'];              
       $product_list = Product::join('category_product','products.id','=','category_product.product_id')
       ->with(['section','category','image','product_attribute','brand','colors','comments'])
@@ -40,13 +39,11 @@ class ProductController extends Controller
     $old_sort = $show_sort[0];  
     $old_show = 10;  
     return view('front_end\category\product_list',compact('product_list','sections','section','brands','show_sort','category','old_show','old_sort'));  
-  
   }
 
 function product_list_with_request(Request $request)
  {
   $show_sort = ['Default','Name(A-Z)','Name(Z-A)'];   
-  
   switch($request->sort){
     case 'Default':
        $column = 'name';
@@ -71,7 +68,7 @@ function product_list_with_request(Request $request)
     ->orderBy('products.'.$column,$status)
     ->paginate($request->show)
     ->withPath('product_list/'.$section.'/'.$category);
-    
+        
     $sections = section::get();
     $brands = brand::get();    
     $old_sort = $request->sort;
@@ -92,7 +89,6 @@ public function list_product_with_brand($brand){
      
     $sections = section::get();
     $brands = brand::get();
-    
     return view('front_end\category\product_list_brand',compact('product_list','sections','brands'));  
 }
 
@@ -104,8 +100,6 @@ public function add_product_to_cart(Request $request){
          $session_id = Session::getId();
          Session::put('session_id',$session_id);
         }     
-      
-     
      //check if product exist in the cart table  don't add it again 
      if(Auth::check()){
       $product_exist = cart::where(['product_id'=>$request->product_id,'user_id'=>Auth::user()->id])
@@ -115,11 +109,11 @@ public function add_product_to_cart(Request $request){
                        ->count();
      }
      if(Auth::check()){
-        $user_id = Auth::user()->id;
+      $user_id = Auth::user()->id;
+     
      }else{
        $user_id = 0;
      }
-
         // insert product to cart
      if($product_exist<=0){ 
          DB::table('carts')->Insert([
@@ -151,8 +145,8 @@ public function add_product_to_cart(Request $request){
          ]);
         session()->flash('success','product successfully add to the cart table');
       }
-      
-      return redirect()->back(); 
+     
+      return redirect('/');
 }
 
 public function show_cart(){
@@ -165,8 +159,8 @@ public function show_cart(){
    $sections = Section::get();
    $category = category::get();
    return view('front_end.cart.shopping_cart',compact('sections','category','cart_list'));
-}
 
+}
 
 public function delete_cart($id){
    $session_id = Session::get('session_id');
@@ -193,7 +187,5 @@ public function delete_cart_when_login($id){
    }
    return redirect()->back();
 }
-
-
 
 }

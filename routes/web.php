@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SlideShowController;
 use App\Http\Controllers\front_end\HomeController;
 use App\Http\Controllers\front_end\UserController;
+use App\Http\Controllers\front_end\OrderController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\front_end\CommentController;
 use App\Http\Controllers\front_end\CheckoutController;
@@ -82,6 +83,7 @@ Route::middleware('admin')->group(function () {
   Route::resource('slide_show', SlideShowController::class)->parameters(['slide_show'=>'id']);
 });
 
+// These route use for front_end  
 Route::prefix('product')->group(function(){
    Route::get('/detail/{id}',[FrontProductController::class,'product_detail'])->name('product.detail');
    Route::get('/product_list/{section?}/{category?}',[FrontProductController::class,'product_list'] )->name('product.product_list');
@@ -100,6 +102,9 @@ Route::prefix('delivery')->group(function(){
    Route::get('/edit/{id}',[CheckoutController::class,'edit'])->name('delivery.edit');
    Route::put('/upate/{id}',[CheckoutController::class,'update'])->name('delivery.update');
 
+});
+Route::prefix('order')->group(function(){
+   Route::post('/',[OrderController::class,'order'])->name('user.order');
 });
 
 Route::get('/show_cart',[FrontProductController::class,'show_cart'])->name("product.show_cart");

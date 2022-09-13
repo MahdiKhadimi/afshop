@@ -1,5 +1,13 @@
 <?php use App\Models\cart?>
-@includeif("front_end.layout.header")  
+@includeif("front_end.layout.header")
+{{--   show errors   --}}
+@include('partial.message.error')
+@include('partial.message.success')
+{{--   this form use to store data in the order table  --}}
+<form action="{{route('user.order')}}" method="post" id="orderForm">
+  @csrf
+  <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">  
+</form>  
 <form action="{{ route('product.update_cart') }}" method="post" id="updateCartForm">
   @csrf
 <div class="main">
@@ -11,6 +19,15 @@
             <h1>delivery address</h1>
             <div class="goods-page">
               <table class="table">
+                <caption>
+                  @error('address')
+                    <div class="alert alert-warning">
+                      {{ $message }}
+                      <button class="close" data-dismiss="alert">&times</button>
+                    </div>
+                      
+                  @enderror
+                </caption>
                 <thead>
                 <tr>
                   <th></th>
@@ -26,14 +43,15 @@
                  
                  <input type="hidden" name="delivery_id" value="{{ $delivery->id }}">
               
-                 <td><input type="checkbox" ></td>
+                 <td><input type="radio" name="address" value="{{ $delivery->id }}" form="orderForm"></td>
                  <td>{{ $delivery->address }}</td>
                  <td>{{ $delivery->city }}</td>
                  <td>{{ $delivery->state }}</td>
                  <td>{{ $delivery->phone }}</td>
                  <td><a href="{{ route('delivery.edit',['id'=>$delivery->id])}}"><span class="fa fa-edit"></span></a></td>
                  <td><a class="delete" href="{{ route('delivery.delete',['id'=>$delivery->id]) }}"><span class="fa fa-trash"></span></a></td>
-               </tr>
+            
+                </tr>
                @endforeach
                <caption><a class="btn btn-default" href="{{ route('delivery.add') }}">Add New Address</a></caption>
                </table>
@@ -67,6 +85,9 @@
                   <td class="goods-page-ref-no">
                     {{ $item->product['description'] }}
                   </td>
+                  <td class="goods-page-ref-no">
+                    {{ $item->quantity }}
+                  </td>
                  
                   <td class="goods-page-price">
                     @php
@@ -94,8 +115,46 @@
                 @endforeach   
                 </table>
                 </div>
-
-                <div class="shopping-total">
+                <div class="col-md-6">
+                  <h3>Payment method</h3>
+                  <div class="col-md-12 col-sm-12">
+                    @error('payment_method')
+                    <div class="alert alert-warning">
+                      {{ $message }}
+                      <button class="close" data-dismiss="alert">&times</button>
+                    </div>
+                      
+                  @enderror
+                    <ul class="list-unstyled list-inline pull-right">
+                      <li>
+                      <label>
+                        <input type="radio" name="payment_method" value="western-union" form="orderForm">
+                        <img src="{{ asset('assets/corporate/img/payments/western-union.jpg')}} " alt="We accept Western Union" title="We accept Western Union">
+                      </label>
+                      </li>
+  
+                      <li>
+                        <label>
+                        <input type="radio" name="payment_method" value="MasterCard"  form="orderForm">
+                        <img src="{{ asset('assets/corporate/img/payments/MasterCard.jpg') }}" alt="We accept MasterCard" title="We accept MasterCard">
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                        <input type="radio" name="payment_method" value="PayPal"  form="orderForm">
+                        <img src="{{ asset('assets/corporate/img/payments/PayPal.jpg') }}" alt="We accept PayPal" title="We accept PayPal">
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                        <input type="radio" name="payment_method" value="Visa"  form="orderForm">
+                        <img src="{{ asset('assets/corporate/img/payments/visa.jpg') }}" alt="We accept Visa" title="We accept Visa">
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="shopping-total col-md-6">
                   <ul>
                    
                     <li class="shopping-total-price">
@@ -105,7 +164,7 @@
                   </ul>
                 </div>
               </div>
-              <button class="btn btn-default pull-right" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button>
+              <button class="btn btn-default pull-right" type="submit" form="orderForm">Continue shopping </button>
             </div>
           </div>
           <!-- END CONTENT -->
@@ -115,6 +174,9 @@
       </div>
     </div>
     
+
+
+
     <!-- BEGIN fast view of a product -->
     <div id="product-pop-up" style="display: none; width: 700px;">
             <div class="product-page product-pop-up">

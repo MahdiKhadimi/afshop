@@ -148,4 +148,10 @@ mail_username   gmail emaill address                 server email address
 Mail_password   gmail password                        server email password
 Mail_encription tls                                   tls 
 
-part-125;
+
+How to make helper 
+1- after making helpers run this common
+composer dump-autoload 
+
+
+part-128;

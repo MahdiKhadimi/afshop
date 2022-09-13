@@ -38,7 +38,10 @@
                   <td class="goods-page-ref-no">
                     {{ $item->product['description'] }}
                   </td>
-                 
+                  <td class="goods-page-quantity">
+                    {{ $item->quantity }}
+                  </td>
+
                   <td class="goods-page-price">
                     @php
                     $price = cart::product_price($item->product_id);

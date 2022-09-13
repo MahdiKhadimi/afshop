@@ -33,15 +33,6 @@ class CheckoutController extends Controller
      
      public function store(Request $request){
         $user_id = Auth::user()->id;
-         // $result = delivery::create([
-         //    'user_id'=>$user_id,
-         //    'address'=>$request->address,
-         //    'city'=>$request->city,
-         //    'state'=>$request->state,
-         //    'pincode'=>$request->pincode,
-         //    'phone'=>$request->phone,
-         //    'status'=>1,
-         // ]);
          $delivery = new delivery;
          $delivery->user_id = $user_id;
          $delivery->address = $request->address;
@@ -77,7 +68,7 @@ class CheckoutController extends Controller
            session()->flash('success','The selected data successfully deleted');
         }else{
            session()->flash('error','Sory Try Again the selected data do not udpated!');
-        }
+        } 
         return redirect('/checkout');         
      }
 

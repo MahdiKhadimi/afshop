@@ -96,7 +96,7 @@
                         @else 
                         <li><a href="{{ route('user.login_form') }}">Log In | Register</a></li>
                         @endif
-                        <li><a href="shop-checkout.html">Checkout</a></li>
+                        <li><a href="{{url('/checkout')}}">Checkout</a></li>
                     </ul>
                 </div>
                 {{--  <!-- END TOP BAR MENU -->  --}}
