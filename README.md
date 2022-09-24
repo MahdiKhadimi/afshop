@@ -16,6 +16,11 @@ it is an ecommerce website that use for online shopping. in this software I have
 - Session 
 - Factories 
 - Seeding 
-- Middleware 
+- Middleware
+- Relationships
+- Routing 
+- Helper function
+- Validation
+
 
 
