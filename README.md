@@ -1,11 +1,12 @@
-<h1 align="center">AFSHOP</p>
+<h1 align="center" color="red">AFSHOP</p>
 
 
 
 ## About afshop
 
 it is an ecommerce website that use for online shopping. in this software I have implemented admin dashboard for managing  products and all of admin works and also in the main page of this site user is able to make acount, buy producs, check product in the cart, commet about specific products and atc.
-## Learning Laravel
+
+## works done
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
