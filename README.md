@@ -4,7 +4,7 @@
 
 ## About afshop
 
-it is an ecommerce website that use for online shopping. in this software I have implemented admin dashboard for managing  products and all of admin works and also in the main page of this site user is able to make acount, buy producs, check product in the cart, commet about specific products and atc.
+It is an ecommerce website that use for online shopping. in this software I have implemented admin dashboard for managing  products and all of admin works and also in the main page of this site user is able to make acount, buy producs, check product in the cart, commet about specific products and atc.
 
 ## Laravel features use in this software 
 - Controller: CRUD
